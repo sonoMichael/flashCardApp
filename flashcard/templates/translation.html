@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<a class="back" href="{{ url_for('home') }}">
+    <div class="back-arrow"></div>
+</a>
+<div id="it" class="btn ita">
+    {{words[id]['it']}}
+    <audio id="audio" controls style="display: none;" src="../static/content/audio/{{ id }}.mp3"></audio>
+</div>
+<div id="ch" class="btn ch">
+    {{words[id]['ch']}}
+</div>
+<div class="arrow-container">
+    {% if prev >= 0 %}
+    <a class="arrow-element" href="{{ url_for('translation', link_id=prev) }}">
+        <div class="arrow left"></div>
+    </a>
+    {% endif %}
+    {% if next < num_words %} <a class="arrow-element" href="{{ url_for('translation', link_id=next) }}">
+        <div class="arrow right"></div>
+        </a>
+        {% endif %}
+</div>
+
+<script>
+    function play() {
+        var audio = document.getElementById("audio");
+        audio.play();
+    }
+    document.getElementById("it").addEventListener("click", play)
+</script>
+{% endblock %}
